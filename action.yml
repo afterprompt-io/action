@@ -1,0 +1,25 @@
+name: Security scan
+description: Deep security scan of each change (leaked secrets, risky code, vulnerable dependencies, Supabase/Firebase rules). Your code is never stored.
+branding:
+  icon: shield
+  color: green
+inputs:
+  api-url:
+    description: "Afterprompt API origin (copy it from your dashboard). Required: there is deliberately no default, so code is never sent to a server you did not choose."
+    required: true
+  fail-on:
+    description: "Fail the job when new findings reach this severity: critical, high, medium or none"
+    required: false
+    default: high
+  timeout-minutes:
+    description: How long to wait for results
+    required: false
+    default: "10"
+outputs:
+  grade:
+    description: Security grade (A-F)
+  report-url:
+    description: Link to the full report
+runs:
+  using: node24
+  main: index.mjs
